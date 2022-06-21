@@ -1,7 +1,7 @@
 ## Keypoint Predictions in C++
 
 ### Description:
-Load a FasterRCNN keypoint model from PyTorch into C++. Stream webcam with OpenCV and draw determined keypoints into the image. 
+Load a FasterRCNN keypoint model from PyTorch into C++. Stream webcam with OpenCV and draw determined keypoints into the image. To predict on one image, the model takes ~1200ms when using CPU and ~60ms on CUDA.
 
 ### Installation requirements (on Ubuntu 20.04):
 * `g++`, `cmake`
