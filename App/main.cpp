@@ -45,7 +45,7 @@ int main(){
         }
         cv::resize(img, img, cv::Size(img_size, img_size), cv::INTER_LINEAR);
         img.convertTo(img, CV_32FC3, 1.0f / 255.0f);
-        cv::cvtColor(img, img, cv::COLOR_BGR2RGB);
+        cv::cvtColor(img, img, cv::COLOR_BGR2RGB); // model expects rgb
         torch::Tensor img_tensor = mat_to_tensor(img, img_size);
 
         std::vector<torch::jit::IValue> inputs;
@@ -60,7 +60,7 @@ int main(){
         torch::Tensor scores = detections.at("scores").toTensor().to(torch::kCPU);
 
         img = draw_keypoints(img, keypoints, scores, true);
-        cv::cvtColor(img, img, cv::COLOR_RGB2BGR);
+        cv::cvtColor(img, img, cv::COLOR_RGB2BGR); // imshow expects bgr
 
         cv::resize(img, img, cv::Size(int(img_size * ratio), img_size), cv::INTER_LINEAR);
         cv::imshow("Keypoints on input", img);
