@@ -7,7 +7,7 @@ Load a FasterRCNN keypoint model from PyTorch into C++. Stream webcam with OpenC
 * `g++`, `cmake`
 * `opencv` 
     * [installation](https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html)
-    * requires: `zlib1g-dev`, `libpng-dev`, `libjpeg-turbo8-dev`
+    * requires: `zlib1g-dev`, `libpng-dev`, `libjpeg-turbo8-dev`, `libgtk2.0-dev`
 * cuda 11.3 
     * [CUDA compatibility](https://docs.nvidia.com/deploy/cuda-compatibility/index.html) | [installation](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) | [download](https://developer.nvidia.com/cuda-11.3.0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=20.04&target_type=deb_local)
     * torchvision doesn't seem to run with cuda 11.7
