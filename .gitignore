@@ -1,3 +1,5 @@
 App/build
 models/
 data/
+/.ipynb_checkpoints/
+/App/.vscode/
