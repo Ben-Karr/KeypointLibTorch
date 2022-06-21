@@ -1,5 +1,3 @@
-//Help: https://github.com/pytorch/vision/tree/main/test/tracing/frcnn
-//      https://github.com/pytorch/vision/tree/main/examples/cpp
 #include <torch/script.h>
 #include <torch/torch.h>
 #include <torchvision/vision.h>
