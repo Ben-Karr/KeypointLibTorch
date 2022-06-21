@@ -1,9 +1,9 @@
-# Keypoint Predictions in C++
+## Keypoint Predictions in C++
 
-## Description:
+### Description:
 Load a FasterRCNN keypoint model from PyTorch into C++. Stream webcam with OpenCV and draw determined keypoints into the image. 
 
-## Installation requirements (on Ubuntu 20.04):
+### Installation requirements (on Ubuntu 20.04):
 * `g++`, `cmake`
 * `opencv` 
     * [installation](https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html)
