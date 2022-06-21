@@ -62,8 +62,8 @@ int main(){
         img = draw_keypoints(img, keypoints, scores, true);
         cv::cvtColor(img, img, cv::COLOR_RGB2BGR); // imshow expects bgr
 
-        cv::resize(img, img, cv::Size(int(img_size * ratio), img_size), cv::INTER_LINEAR);
-        cv::imshow("Keypoints on input", img);
+        cv::resize(img, img, cv::Size(int(img_size * ratio), img_size), cv::INTER_LINEAR); // restore input image ratio
+        cv::imshow("Keypoint detection", img);
 
         char c = cv::waitKey(1);
         if (c == 27){
@@ -80,7 +80,7 @@ cv::Mat draw_keypoints(cv::Mat img, torch::Tensor keypoints, torch::Tensor score
         if (scores[i].item().toFloat() < 0.7) {
             continue;
         }
-        std::vector<cv::Point2f> points;
+        std::vector<cv::Point2f> points; // store keypoints to draw limbs between them
         for (int j = 0; j < keypoints.sizes()[1]; ++j){
             float x_value, y_value;
             x_value = keypoints[i][j][0].item().toFloat();
@@ -97,8 +97,9 @@ cv::Mat draw_keypoints(cv::Mat img, torch::Tensor keypoints, torch::Tensor score
 }
 
 cv::Mat draw_limbs(cv::Mat img, std::vector<cv::Point2f> points){
-    enum {nose, left_eye, right_eye, left_ear, right_ear, left_shoulder, right_shoulder, left_elbow, right_elbow, left_wrist, right_wrist, left_hip, right_hip, left_knee, right_knee, left_ankle, right_ankle};
+    // order given by model
     // froms[i] forms a limb with tos[i]
+    enum {nose, left_eye, right_eye, left_ear, right_ear, left_shoulder, right_shoulder, left_elbow, right_elbow, left_wrist, right_wrist, left_hip, right_hip, left_knee, right_knee, left_ankle, right_ankle};
     std::vector<int> froms{right_eye, right_eye, left_eye, left_eye, right_shoulder, right_elbow, left_shoulder, left_elbow, right_hip, right_knee, left_hip, left_knee, right_shoulder, right_hip, right_shoulder, left_shoulder};
     std::vector<int>   tos{nose, right_ear, nose, left_ear, right_elbow, right_wrist, left_elbow, left_wrist, right_knee, right_ankle, left_knee, left_ankle, left_shoulder, left_hip, right_hip, left_hip};
     cv::Point2f from;
@@ -107,7 +108,7 @@ cv::Mat draw_limbs(cv::Mat img, std::vector<cv::Point2f> points){
     for (int i = 0; i <  16; i++){
         from = points[froms[i]];
         to = points[tos[i]];
-        cv::line(img, from, to, cv::Scalar(0, 0, 0), 2); // to see line on light backgrounds
+        cv::line(img, from, to, cv::Scalar(0, 0, 0), 2); // to see the line on light backgrounds
         cv::line(img, from, to, cv::Scalar(10, 255, 10), 1);
     }
     return img;
