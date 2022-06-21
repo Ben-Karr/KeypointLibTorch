@@ -15,6 +15,7 @@
 
 cv::Mat draw_keypoints(cv::Mat img, torch::Tensor keypoints, torch::Tensor scores, bool with_limbs);
 cv::Mat draw_limbs(cv::Mat img, std::vector<cv::Point2f> points);
+torch::Tensor mat_to_tensor(cv::Mat img, const int img_size);
 
 int main(){
     const int img_size = 640;
@@ -45,11 +46,7 @@ int main(){
         cv::resize(img, img, cv::Size(img_size, img_size), cv::INTER_LINEAR);
         img.convertTo(img, CV_32FC3, 1.0f / 255.0f);
         cv::cvtColor(img, img, cv::COLOR_BGR2RGB);
-
-        torch::Tensor img_tensor = torch::from_blob(img.data, {img_size, img_size, 3});
-        img_tensor = img_tensor.permute({2,0,1});
-        img_tensor = img_tensor.to(torch::kCUDA);
-        img_tensor = img_tensor.contiguous();
+        torch::Tensor img_tensor = mat_to_tensor(img, img_size);
 
         std::vector<torch::jit::IValue> inputs;
         std::vector<torch::Tensor> images;
@@ -114,4 +111,12 @@ cv::Mat draw_limbs(cv::Mat img, std::vector<cv::Point2f> points){
         cv::line(img, from, to, cv::Scalar(10, 255, 10), 1);
     }
     return img;
+}
+
+torch::Tensor mat_to_tensor(cv::Mat img, const int img_size){
+    torch::Tensor img_tensor = torch::from_blob(img.data, {img_size, img_size, 3});
+    img_tensor = img_tensor.permute({2,0,1});
+    img_tensor = img_tensor.to(torch::kCUDA);
+    img_tensor = img_tensor.contiguous();
+    return img_tensor;
 }
