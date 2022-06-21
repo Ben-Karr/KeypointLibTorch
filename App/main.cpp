@@ -25,9 +25,9 @@ int main(){
     double frame_height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
     double ratio = frame_width / frame_height;
 
-    torch::jit::script::Module model; // The model includes normalization
+    torch::jit::script::Module model;
     try {
-        model = torch::jit::load("../../models/traced_keypoint_model.pt");
+        model = torch::jit::load("../../models/traced_keypoint_model.pt"); // The model includes normalization
         model.to(torch::kCUDA);
         model.eval();
         std::cout << "Successfully loaded model" <<std::endl;
