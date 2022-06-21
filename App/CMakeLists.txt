@@ -10,6 +10,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 add_executable(${PROJECT_NAME} main.cpp)
+#add_executable(${PROJECT_NAME} single_image.cpp)
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_range_for)
 target_link_libraries(${PROJECT_NAME} TorchVision::TorchVision)
