@@ -7,7 +7,7 @@ Load a FasterRCNN keypoint model from PyTorch into C++. Stream webcam with OpenC
 ![sample_man_keypoints](sample_with_keypoints.jpg)
 
 ### Installation requirements (on Ubuntu 20.04):
-Note: also successful with Ubuntu 22.04 | cuda 11.7 
+Note: also successfully with with Ubuntu 22.04 & cuda 11.7 
 * `g++`, `cmake`
 * `opencv` 
     * [installation](https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html)
