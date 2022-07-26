@@ -7,10 +7,12 @@ Load a FasterRCNN keypoint model from PyTorch into C++. Stream webcam with OpenC
 ![sample_man_keypoints](sample_with_keypoints.jpg)
 
 ### Installation requirements (on Ubuntu 20.04):
+Note: also successful with Ubuntu 22.04 | cuda 11.7 
 * `g++`, `cmake`
 * `opencv` 
     * [installation](https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html)
     * requires: `zlib1g-dev`, `libpng-dev`, `libjpeg-turbo8-dev`, `libgtk2.0-dev`, `python3.x-dev`
+    * build with `-DCMAKE_BUILD_TYPE=RELEASE`, `-DWITH_QT=OFF` & `-DWITH_GTK=ON`
 * cuda 11.3 
     * [CUDA compatibility](https://docs.nvidia.com/deploy/cuda-compatibility/index.html) | [installation](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) | [download](https://developer.nvidia.com/cuda-11.3.0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=20.04&target_type=deb_local)
     * torchvision doesn't seem to run with cuda 11.7
@@ -20,8 +22,9 @@ Load a FasterRCNN keypoint model from PyTorch into C++. Stream webcam with OpenC
     * installation file references cuda 11.6 but is backward compatible to 11.3
 * torch
     * [installation](https://pytorch.org/cppdocs/installing.html) | [download](https://pytorch.org/get-started/locally/)
+    * use the cxx11 ABI version (not pre-cxx11 ABI)
 * torchvision
     * for (pretrained) keypoint model
     * clone the torchvision [repo](https://github.com/pytorch/vision)
     * [installation](https://github.com/pytorch/vision) see "Using the models on C++"
-    * build with `-CMAKE_PREFIX_PATH=path/to/libtorch` and `-DWITH_CUDA=on` for CUDA support
+    * build with `-CMAKE_PREFIX_PATH=path/to/libtorch` & `-DWITH_CUDA=on` (for CUDA support)
