@@ -22,5 +22,6 @@ Load a FasterRCNN keypoint model from PyTorch into C++. Stream webcam with OpenC
     * [installation](https://pytorch.org/cppdocs/installing.html) | [download](https://pytorch.org/get-started/locally/)
 * torchvision
     * for (pretrained) keypoint model
+    * clone the torchvision [repo](https://github.com/pytorch/vision)
     * [installation](https://github.com/pytorch/vision) see "Using the models on C++"
-    * build with `-DWITH_CUDA=on`
+    * build with -CMAKE_PREFIX_PATH=path/to/libtorch and `-DWITH_CUDA=on` for CUDA support
